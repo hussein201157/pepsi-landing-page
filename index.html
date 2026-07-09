@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pepsi Official Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================
+           1. كود الـ CSS (التنسيق والألوان والأنيميشن)
+           ========================================== */
+        :root {
+            --bg-dark: #000411;
+            --pepsi-blue: #004b93;
+            --electric-blue: #0056ff;
+            --text-muted: #b3c5d7;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --dynamic-gradient: #002266;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #fff;
+            overflow-x: hidden;
+            padding: 0 6%;
+            position: relative;
+            min-height: 100vh;
+            transition: background 0.5s ease;
+        }
+
+        .bg-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: radial-gradient(circle at 65% 35%, var(--dynamic-gradient) 0%, var(--bg-dark) 65%);
+            z-index: -2;
+            transition: background 0.6s ease;
+        }
+
+        .bg-dots {
+            position: absolute;
+            top: 5%;
+            right: 15%;
+            width: 600px;
+            height: 600px;
+            background-image: radial-gradient(rgba(0, 86, 255, 0.3) 20%, transparent 20%);
+            background-size: 30px 30px;
+            border-radius: 50%;
+            mask-image: radial-gradient(circle, black 40%, transparent 70%);
+            -webkit-mask-image: radial-gradient(circle, black 40%, transparent 70%);
+            z-index: -1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .logo img {
+            width: 55px;
+            height: auto;
+            transition: transform 0.3s;
+        }
+        .logo img:hover { transform: rotate(10deg) scale(1.05); }
+
+        .navigation a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-right: 25px;
+            letter-spacing: 0.5px;
+            transition: color 0.3s, transform 0.3s;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .navigation a:hover {
+            color: var(--electric-blue);
+            transform: translateY(-2px);
+        }
+
+        .navigation .arrow {
+            font-size: 0.6rem;
+            vertical-align: middle;
+            margin-left: 2px;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            font-size: 1.1rem;
+        }
+
+        .header-icons .icon {
+            cursor: pointer;
+            opacity: 0.8;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .header-icons .icon:hover {
+            opacity: 1;
+            transform: scale(1.2);
+            color: var(--electric-blue);
+        }
+
+        .lang-selector {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+        .lang-selector:hover { color: var(--electric-blue); }
+
+        /* القسم الرئيسي Hero */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            align-items: center;
+            min-height: 70vh;
+            padding-top: 20px;
+        }
+
+        .hero-text h1 {
+            font-size: 5.5rem;
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -1px;
+            margin-bottom: 25px;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background-color: var(--electric-blue);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 16px 35px;
+            border-radius: 50px;
+            box-shadow: 0 4px 20px rgba(0, 86, 255, 0.4);
+            transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-btn:hover {
+            background-color: #0044cc;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0, 86, 255, 0.6);
+        }
+
+        .hero-images {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-visual-container {
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            width: 100%;
+            height: 500px;
+        }
+
+        .main-can {
+            max-width: 260px;
+            z-index: 2;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.7));
+            animation: smoothFloat 5s ease-in-out infinite;
+            transition: transform 0.2s, opacity 0.4s ease;
+        }
+
+        .glass-cup {
+            max-width: 240px;
+            position: absolute;
+            right: 15%;
+            bottom: 5%;
+            z-index: 1;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5));
+            animation: smoothFloat 5s ease-in-out infinite;
+            animation-delay: 0.5s;
+            transition: transform 0.2s;
+        }
+
+        .paused-animation {
+            animation-play-state: paused !important;
+        }
+
+        .slider-controls {
+            position: absolute;
+            bottom: 10%;
+            right: 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.9rem;
+            user-select: none;
+        }
+
+        .pause-icon {
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 5px 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        .pause-icon:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #fff;
+        }
+
+        /* شريط الخدمات المقسم */
+        .features-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 30px 0;
+            margin: 40px 0 80px 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .feature-item:hover { background: rgba(255,255,255,0.02); }
+        .feature-item:last-child { border-right: none; }
+
+        .f-icon { font-size: 1.8rem; transition: transform 0.3s; }
+        .feature-item:hover .f-icon { transform: scale(1.2) rotate(-10deg); }
+
+        .feature-item h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .feature-item p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* قسم المنتجات السفلي */
+        .discover-section { padding-bottom: 100px; }
+
+        .discover-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .discover-header h3 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+        }
+
+        .view-all {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s;
+        }
+        .view-all:hover { color: var(--electric-blue); }
+
+        .circle-arrow {
+            border: 1px solid #fff;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .view-all:hover .circle-arrow {
+            background: var(--electric-blue);
+            border-color: var(--electric-blue);
+            transform: translateX(3px);
+        }
+
+        /* شبكة الكروت الافتراضية */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .product-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 40px 25px 30px 25px;
+            text-align: left;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 86, 255, 0.5);
+            box-shadow: 0 15px 30px rgba(0, 86, 255, 0.15);
+        }
+
+        .product-card.active-card {
+            border-color: var(--electric-blue);
+            background: linear-gradient(135deg, rgba(0, 86, 255, 0.1) 0%, rgba(255,255,255,0.02) 100%);
+        }
+
+        .product-card img {
+            width: 140px;
+            height: auto;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 15px 20px rgba(0,0,0,0.5));
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover img { transform: scale(1.08) rotate(5deg); }
+
+        .card-info { width: 100%; }
+
+        .card-info h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .card-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            min-height: 45px;
+            margin-bottom: 25px;
+        }
+
+        .learn-more {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+        .product-card:hover .learn-more { color: var(--electric-blue); }
+
+        .arrow-icon {
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .product-card:hover .arrow-icon {
+            background: var(--electric-blue);
+            border-color: var(--electric-blue);
+            transform: translateX(2px);
+        }
+
+        /* ==========================================
+           2. كود الـ CSS المضاف للنوافذ المنبثقة (Modals)
+           ========================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 4, 17, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 40px;
+            border-radius: 24px;
+            max-width: 550px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            transform: scale(0.8) translateY(30px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: color 0.2s, transform 0.2s;
+            line-height: 1;
+        }
+        .close-modal:hover {
+            color: #fff;
+            transform: rotate(90deg);
+        }
+
+        .modal-content h2 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .modal-content p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        /* ستايل مخصص لنافذة البحث */
+        .search-input-wrapper {
+            position: relative;
+            margin-top: 20px;
+        }
+        .search-input-wrapper input {
+            width: 100%;
+            padding: 15px 25px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .search-input-wrapper input:focus {
+            border-color: var(--electric-blue);
+        }
+
+        @keyframes smoothFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        @media (max-width: 1024px) {
+            .hero { grid-template-columns: 1fr; text-align: center; gap: 50px; }
+            .hero-text h1 { font-size: 4rem; }
+            .features-bar { grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 20px; }
+            .feature-item { border-right: none; }
+            .products-grid { grid-template-columns: repeat(2, 1fr); }
+            .glass-cup { right: 25%; }
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 0 4%; }
+            .navigation { display: none; }
+            .features-bar { grid-template-columns: 1fr; }
+            .products-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-gradient"></div>
+    <div class="bg-dots"></div>
+
+    <header>
+        <div class="header-left">
+            <a href="#" class="logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Pepsi_logo_2014.svg" alt="Pepsi Logo">
+            </a>
+            <nav class="navigation">
+                <a class="nav-trigger" data-target="modal-products">PRODUCTS</a>
+                <a class="nav-trigger" data-target="modal-news">WHAT'S NEW <span class="arrow">v</span></a>
+                <a class="nav-trigger" data-target="modal-shop">SHOP</a>
+                <a class="nav-trigger" data-target="modal-rewards">PEPSI® REWARDS</a>
+                <a class="nav-trigger" data-target="modal-about">ABOUT US <span class="arrow">v</span></a>
+            </nav>
+        </div>
+        <div class="header-icons">
+            <span class="icon nav-trigger" data-target="modal-search">🔍</span>
+            <span class="icon nav-trigger" data-target="modal-profile">👤</span>
+            <span class="icon nav-trigger" data-target="modal-cart">🛒</span>
+            <a href="#" class="lang-selector">EN <span>v</span></a>
+        </div>
+    </header>
+
+    <main class="hero">
+        <div class="hero-text">
+            <h1 id="hero-title">THIRSTY<br>FOR MORE</h1>
+            <p id="hero-subtitle" class="subtitle">More flavor. More refreshment.<br>More of what you love.</p>
+            <a href="#" class="cta-btn nav-trigger" data-target="modal-products">EXPLORE PRODUCTS <span class="btn-arrow">›</span></a>
+        </div>
+        <div class="hero-images">
+            <div class="main-visual-container">
+                <img src="https://i.postimg.cc/0yVw1d8s/Pepsi-Regular-7-5-oz-Can-Original-526-1050.png" alt="Pepsi Regular" class="main-can">
+                <img src="https://i.postimg.cc/fyWssXW4/Pepsi-Diet-12-oz-Glass-Fountain-Cup-Original-3000-1688.png" alt="Pepsi Glass Cup" class="glass-cup">
+            </div>
+            <div class="slider-controls">
+                <span class="pause-icon" id="play-pause-btn">||</span>
+                <span class="slider-index" id="slider-counter">01 / 04</span>
+            </div>
+        </div>
+    </main>
+
+    <section class="features-bar">
+        <div class="feature-item nav-trigger" data-target="modal-shop">
+            <span class="f-icon">🥤</span>
+            <div>
+                <h4>SHOP</h4>
+                <p>PRODUCTS</p>
+            </div>
+        </div>
+        <div class="feature-item nav-trigger" data-target="modal-rewards">
+            <span class="f-icon">⭐</span>
+            <div>
+                <h4>PEPSI®</h4>
+                <p>REWARDS</p>
+            </div>
+        </div>
+        <div class="feature-item nav-trigger" data-target="modal-find">
+            <span class="f-icon">📍</span>
+            <div>
+                <h4>FIND</h4>
+                <p>IN STORE</p>
+            </div>
+        </div>
+        <div class="feature-item nav-trigger" data-target="modal-contact">
+            <span class="f-icon">💬</span>
+            <div>
+                <h4>CONTACT</h4>
+                <p>US</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="discover-section">
+        <div class="discover-header">
+            <h3>DISCOVER OUR PRODUCTS</h3>
+            <a href="#" class="view-all nav-trigger" data-target="modal-products">VIEW ALL <span class="circle-arrow">›</span></a>
+        </div>
+
+        <div class="products-grid">
+            <div class="product-card active-card" data-index="01" data-image="https://i.postimg.cc/0yVw1d8s/Pepsi-Regular-7-5-oz-Can-Original-526-1050.png" data-color="#002266" data-title="THIRSTY<br>FOR MORE" data-sub="More flavor. More refreshment.<br>More of what you love.">
+                <img src="https://i.postimg.cc/0yVw1d8s/Pepsi-Regular-7-5-oz-Can-Original-526-1050.png" alt="Pepsi Cola">
+                <div class="card-info">
+                    <h4>Pepsi Cola</h4>
+                    <p>The bold, refreshing taste you know and love.</p>
+                    <a href="#" class="learn-more">LEARN MORE <span class="arrow-icon">›</span></a>
+                </div>
+            </div>
+            <div class="product-card" data-index="02" data-image="https://i.postimg.cc/mD8g7m4G/Pepsi-Zero-Sugar-7-5-oz-Can-Original-526-1050.png" data-color="#111111" data-title="ZERO SUGAR<br>ZERO COMPROMISE" data-sub="All the bold Pepsi taste you love,<br>with absolutely zero sugar.">
+                <img src="https://i.postimg.cc/tJ1Ncv04/pngwing-com.png" alt="Pepsi Zero Sugar">
+                <div class="card-info">
+                    <h4>Pepsi Zero Sugar</h4>
+                    <p>All the Pepsi taste, zero sugar.</p>
+                    <a href="#" class="learn-more">LEARN MORE <span class="arrow-icon">›</span></a>
+                </div>
+            </div>
+            <div class="product-card" data-index="03" data-image="https://i.postimg.cc/859dQdmC/Pepsi-Diet-7-5-oz-Can-Original-526-1050.png" data-color="#556677" data-title="LIGHT &<br>REFRESHING" data-sub="The classic crisp, clean taste of Diet Pepsi.<br>Nothing holds you back.">
+                <img src="https://i.postimg.cc/859dQdmC/Pepsi-Diet-7-5-oz-Can-Original-526-1050.png" alt="Diet Pepsi">
+                <div class="card-info">
+                    <h4>Diet Pepsi</h4>
+                    <p>Classic taste, zero sugar.</p>
+                    <a href="#" class="learn-more">LEARN MORE <span class="arrow-icon">›</span></a>
+                </div>
+            </div>
+            <div class="product-card" data-index="04" data-image="https://i.postimg.cc/66PnyhZF/Pepsi-Wild-cherry-12-oz-Can-Original-540-1050.png" data-color="#7a0016" data-title="WILD AT<br>HEART" data-sub="A wild burst of sweet cherry flavor<br>mixed with your favorite Pepsi bold taste.">
+                <img src="https://i.postimg.cc/66PnyhZF/Pepsi-Wild-cherry-12-oz-Can-Original-540-1050.png" alt="Pepsi Wild Cherry">
+                <div class="card-info">
+                    <h4>Pepsi Wild Cherry</h4>
+                    <p>Bold Pepsi taste with a burst of wild cherry.</p>
+                    <a href="#" class="learn-more">LEARN MORE <span class="arrow-icon">›</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal-overlay" id="modal-products">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>OUR FLAVORS</h2>
+            <p>Explore the elite selection of refreshment. From classic legacy to zero sugar hits, we craft experiences for every single taste.</p>
+            <a href="#" class="cta-btn close-btn-action" style="box-shadow:none;">GOT IT</a>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-news">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>WHAT'S NEW</h2>
+            <p>Big drops ahead! Stay tuned for our upcoming summer limited editions and high-tier streaming brand collaborations.</p>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-shop">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>PEPSI SHOP</h2>
+            <p>Your portal to exclusive merchandise, collectible vintage cans, and customized premium gear. Coming soon to your region.</p>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-rewards">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>PEPSI® REWARDS</h2>
+            <p>Scan your codes, rank up your profile, and unlock elite digital loot, gaming setups, and VIP event passes.</p>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-about">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>ABOUT US</h2>
+            <p>Uncompromising refreshment since 1898. Driven by youth culture, design perfection, and the continuous generation of bold flavors.</p>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-search">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>SEARCH PLATFORM</h2>
+            <p>Looking for something specific?</p>
+            <div class="search-input-wrapper">
+                <input type="text" placeholder="Type flavor, merch, or location..." autofocus>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-profile">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>USER PROFILE</h2>
+            <p>Welcome back, Captain! Ready to check your score and redeem your unique rewards tokens?</p>
+            <a href="#" class="cta-btn" style="padding: 12px 25px;">SIGN IN</a>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-cart">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>YOUR CART</h2>
+            <p>Your premium custom crate is currently empty. Go ahead and drop some ice-cold flavors in there!</p>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-find">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>FIND IN STORE</h2>
+            <p>Locating closest elite stores and smart vending machines in your current district...</p>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-contact">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>CONTACT SQUAD</h2>
+            <p>Have an epic idea or a brand feedback? Reach out directly and let's craft the next massive experience together.</p>
+        </div>
+    </div>
+
+
+    <script>
+        // ==========================================
+        // 4. كود الـ JavaScript للتفاعل والسلايدر والنوافذ
+        // ==========================================
+        const mainCan = document.querySelector('.main-can');
+        const glassCup = document.querySelector('.glass-cup');
+        const root = document.documentElement;
+        const productCards = document.querySelectorAll('.product-card');
+        const sliderCounter = document.getElementById('slider-counter');
+        const heroTitle = document.getElementById('hero-title');
+        const heroSubtitle = document.getElementById('hero-subtitle');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+
+        let isParallaxEnabled = true;
+
+        // تأثير الماوس Parallax
+        document.addEventListener('mousemove', (e) => {
+            if (!isParallaxEnabled) return;
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 35;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 35;
+            if (window.innerWidth > 1024) {
+                mainCan.style.transform = `translate(${xAxis}px, ${yAxis}px)`;
+                glassCup.style.transform = `translate(${xAxis * 0.4}px, ${yAxis * 0.4}px)`;
+            }
+        });
+
+        // السلايدر التفاعلي
+        productCards.forEach(card => {
+            card.addEventListener('click', () => {
+                productCards.forEach(c => c.classList.remove('active-card'));
+                card.classList.add('active-card');
+
+                const newImg = card.getAttribute('data-image');
+                const newColor = card.getAttribute('data-color');
+                const newIndex = card.getAttribute('data-index');
+                const newTitle = card.getAttribute('data-title');
+                const newSub = card.getAttribute('data-sub');
+
+                mainCan.style.opacity = '0';
+                mainCan.style.transform = 'translateY(20px) scale(0.9)';
+                
+                setTimeout(() => {
+                    mainCan.src = newImg;
+                    mainCan.style.opacity = '1';
+                    mainCan.style.transform = 'translateY(0) scale(1)';
+                    heroTitle.innerHTML = newTitle;
+                    heroSubtitle.innerHTML = newSub;
+                    sliderCounter.innerText = `${newIndex} / 04`;
+                }, 300);
+
+                root.style.setProperty('--dynamic-gradient', newColor);
+            });
+        });
+
+        // تشغيل وإيقاف الحركة تلقائياً
+        playPauseBtn.addEventListener('click', () => {
+            mainCan.classList.toggle('paused-animation');
+            glassCup.classList.toggle('paused-animation');
+            if (mainCan.classList.contains('paused-animation')) {
+                playPauseBtn.innerText = '►';
+                isParallaxEnabled = false;
+            } else {
+                playPauseBtn.innerText = '||';
+                isParallaxEnabled = true;
+            }
+        });
+
+        // منطق النوافذ المنبثقة التفاعلية (Modals System)
+        const triggers = document.querySelectorAll('.nav-trigger');
+        const overlays = document.querySelectorAll('.modal-overlay');
+        const closeButtons = document.querySelectorAll('.close-modal, .close-btn-action');
+
+        // فتح النافذة عند الضغط على الزر المخصص لها
+        triggers.forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = trigger.getAttribute('data-target');
+                const targetModal = document.getElementById(targetId);
+                if (targetModal) {
+                    targetModal.classList.add('active');
+                }
+            });
+        });
+
+        // إغلاق النافذة عند الضغط على زر الإغلاق
+        closeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                overlays.forEach(overlay => overlay.classList.remove('active'));
+            });
+        });
+
+        // إغلاق النافذة عند الضغط على الخلفية الشفافة بالخارج
+        overlays.forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
